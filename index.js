@@ -1,8 +1,7 @@
+/* eslint-disable import/extensions */
 import express from 'express';
 import mongoose from 'mongoose';
-
-// eslint-disable-next-line import/extensions
-import Post from './Post.js';
+import router from './router.js';
 
 const PORT = 3000;
 const DB_URL = 'mongodb+srv://avasindev:hOkrHaRBuhEtxpTY@cluster0.ctdrist.mongodb.net/?retryWrites=true&w=majority';
@@ -10,18 +9,9 @@ const DB_URL = 'mongodb+srv://avasindev:hOkrHaRBuhEtxpTY@cluster0.ctdrist.mongod
 const app = express();
 
 app.use(express.json());
+app.use('/api', router);
 
-app.post('/', async (req, res) => {
-  const {
-    author, title, content,
-  } = req.body;
-
-  const post = await Post.create({
-    author, title, content,
-  });
-
-  res.json(post);
-});
+app.post('/');
 
 async function startApp() {
   try {
